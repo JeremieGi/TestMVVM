@@ -17,24 +17,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Déclaration du RecyclerView
         val varRecyclerView = findViewById<RecyclerView>(R.id.ZR_Notes)
-        varRecyclerView.layoutManager(LinearLayoutManager(this))
+        varRecyclerView.layoutManager = LinearLayoutManager(this)
+        varRecyclerView.setHasFixedSize(true)
 
-//        val noteRepository = NoteRepository(application)
-//        noteRepository.getAllNotes()
-
+        val oAdapter = NoteAdapter()
+        varRecyclerView.adapter = oAdapter
 
         // Lien avec le ViewModel
         oNoteViewModel = ViewModelProvider(this)[NoteViewModel::class.java]
 
-        var oTest = Note(sTitle = "Titre", sDescription = "Desc", nPriority = 1)
-        oNoteViewModel.insert(oTest)
+//        // Init des données
+//        var oTest = Note(sTitle = "Titre", sDescription = "Desc", nPriority = 1)
+//        oNoteViewModel.insert(oTest)
+
 
         oNoteViewModel.getAllNotes().observe(this, Observer<List<Note>> {
 
             // A chaque changement des notes
 
-            // update recycler view
+
+            oAdapter.setNotes(it)
 
             Toast.makeText(this,"test ${it.size}",Toast.LENGTH_LONG).show()
         })
