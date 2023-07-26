@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 class NoteViewHolder(itemView_P: View) : RecyclerView.ViewHolder(itemView_P) {
 
-    private var textViewTitle : TextView
-    private var textViewDescription : TextView
-    private var textViewPriority : TextView
+    internal var textViewTitle : TextView
+    internal var textViewDescription : TextView
+    internal var textViewPriority : TextView
 
     init {
         this.textViewTitle = itemView_P.findViewById(R.id.SAI_Title)

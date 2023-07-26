@@ -2,9 +2,12 @@ package com.example.testmvvm
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,6 +16,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val varRecyclerView = findViewById<RecyclerView>(R.id.ZR_Notes)
+        varRecyclerView.layoutManager(LinearLayoutManager(this))
 
 //        val noteRepository = NoteRepository(application)
 //        noteRepository.getAllNotes()

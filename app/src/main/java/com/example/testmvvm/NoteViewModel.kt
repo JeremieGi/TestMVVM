@@ -10,11 +10,11 @@ import kotlinx.coroutines.launch
 class NoteViewModel : AndroidViewModel{
 
     private var oRepository : NoteRepository
-    private var oLiveData_allNotes : LiveData<List<Note>>
+    private var oLiveDataAllNotes : LiveData<List<Note>>
 
     constructor(application_P : Application) : super(application_P) {
         oRepository = NoteRepository(application_P)
-        oLiveData_allNotes = oRepository.getAllNotes()
+        oLiveDataAllNotes = oRepository.getAllNotes()
     }
 
     fun insert(oNote_P : Note){
@@ -42,6 +42,6 @@ class NoteViewModel : AndroidViewModel{
     }
 
     fun getAllNotes() : LiveData<List<Note>> {
-        return oLiveData_allNotes
+        return oLiveDataAllNotes
     }
 }
