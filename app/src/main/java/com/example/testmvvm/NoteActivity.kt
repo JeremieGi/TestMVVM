@@ -77,7 +77,7 @@ class NoteActivity : AppCompatActivity() {
             return
         }
 
-        var oIntent = Intent()
+        val oIntent = Intent()
         oIntent.putExtra(EXTRA_TITLE,sTitle)
         oIntent.putExtra(EXTRA_DESCRIPTION,sDescription)
         oIntent.putExtra(EXTRA_PRIORITY,nPrio)

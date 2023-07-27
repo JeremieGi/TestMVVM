@@ -23,7 +23,7 @@ class NoteAdapter : RecyclerView.Adapter<NoteViewHolder>() {
 
     override fun onBindViewHolder(holder: NoteViewHolder, nPosition_P: Int) {
         // méthode permettant d'associer les datas
-        val oCurrentNote = aoNotes.get(nPosition_P)
+        val oCurrentNote = aoNotes[nPosition_P]
         holder.textViewTitle.text = oCurrentNote.sTitle
         holder.textViewDescription.text = oCurrentNote.sDescription
         holder.textViewPriority.text = oCurrentNote.nPriority.toString()
