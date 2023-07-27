@@ -37,5 +37,9 @@ class NoteAdapter : RecyclerView.Adapter<NoteViewHolder>() {
         // If you need to change the specific item, then it's better to use notifyItemChanged(position) so that it won't refresh & rebind the whole dataset which can impact the performance if the dataset is large.
     }
 
+    fun getNoteAtPosition(nPosition_P: Int) : Note{
+        return aoNotes[nPosition_P]
+    }
+
     // suite : https://www.youtube.com/watch?v=reSPN7mgshI
 }
