@@ -16,7 +16,7 @@ class NoteRepository(oApplication_P : Application){
 
 
     init {
-        var oDatabase = NoteDatabase.getDatabase(oApplication_P)
+        val oDatabase = NoteDatabase.getDatabase(oApplication_P)
         // oDatabase = NoteDatabase.invoke(oApplication_P)
         this.oNoteDAO = oDatabase.noteDao()
 
@@ -26,23 +26,23 @@ class NoteRepository(oApplication_P : Application){
 
     }
 
-    public suspend fun insert(oNote_P : Note) {
+    suspend fun insert(oNote_P : Note) {
         oNoteDAO.insert(oNote_P)
     }
 
-    public suspend fun update(oNote_P : Note) {
+    suspend fun update(oNote_P : Note) {
         oNoteDAO.update(oNote_P)
     }
 
-    public suspend fun delete(oNote_P : Note) {
+    suspend fun delete(oNote_P : Note) {
         oNoteDAO.delete(oNote_P)
     }
 
-    public suspend fun deleteAllNotes() {
+    suspend fun deleteAllNotes() {
         oNoteDAO.deleteAllNotes()
     }
 
-    public fun getAllNotes() : LiveData<List<Note>> {
+    fun getAllNotes() : LiveData<List<Note>> {
         aoAllNotes = oNoteDAO.getAllNotes()
         return aoAllNotes
     }

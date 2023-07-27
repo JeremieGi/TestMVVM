@@ -7,15 +7,20 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NoteViewModel : AndroidViewModel{
+class NoteViewModel(application_P : Application) : AndroidViewModel(application_P) {
 
     private var oRepository : NoteRepository
-    private var oLiveDataAllNotes : LiveData<List<Note>>
 
-    constructor(application_P : Application) : super(application_P) {
+    private var oLiveDataAllNotes : LiveData<List<Note>>
+    init{
         oRepository = NoteRepository(application_P)
         oLiveDataAllNotes = oRepository.getAllNotes()
     }
+
+/*    constructor(application_P : Application) : super(application_P) {
+        oRepository = NoteRepository(application_P)
+        oLiveDataAllNotes = oRepository.getAllNotes()
+    }*/
 
     fun insert(oNote_P : Note){
         viewModelScope.launch(Dispatchers.IO){

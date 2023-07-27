@@ -20,6 +20,6 @@
         android:src="@drawable/ic_add"
         android:layout_gravity="bottom|end"
         android:layout_margin="32dp"
-        />
+        android:contentDescription="Add a note" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,7 +1,6 @@
 package com.example.testmvvm
 
 import android.app.Application
-import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -16,8 +15,6 @@ abstract class NoteDatabase : RoomDatabase() {
 
         @Volatile
         private var oInstance : NoteDatabase? = null
-
-        private val LOCK = Any()
 
         fun getDatabase(oApplication_P : Application): NoteDatabase {
             if (oInstance == null) {
