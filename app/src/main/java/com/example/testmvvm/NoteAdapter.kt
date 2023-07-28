@@ -10,7 +10,10 @@ class NoteAdapter : RecyclerView.Adapter<NoteViewHolder>()  {
 
     private var aoNotes : List<Note> = ArrayList()
 
-    private var oOnClickListener: OnClickListener? = null
+    //private var oOnClickListener: OnClickListener? = null
+    var oOnItemClick : ((Note) -> Unit) ?= null
+
+
 
     override fun onCreateViewHolder(parent_P: ViewGroup, viewType_P: Int): NoteViewHolder {
         // méthode appelé à chaque création de ViewHolder (élément répété)
@@ -37,10 +40,13 @@ class NoteAdapter : RecyclerView.Adapter<NoteViewHolder>()  {
 
         // add an onclickListener to the item.
         itemView_P.itemView.setOnClickListener {
-            if (oOnClickListener != null) {
-                oOnClickListener!!.onClick(oCurrentNote,nPosition_P)
-            }
+//            if (oOnClickListener != null) {
+//                oOnClickListener!!.onClick(oCurrentNote,nPosition_P)
+//            }
+            oOnItemClick?.invoke(oCurrentNote)
         }
+
+
 
     }
 
@@ -57,9 +63,9 @@ class NoteAdapter : RecyclerView.Adapter<NoteViewHolder>()  {
     }
 
     // A function to bind the onclickListener.
-    fun setOnClickListener(onClickListener_P: OnClickListener) {
-        this.oOnClickListener = onClickListener_P
-    }
+//    fun setOnClickListener(onClickListener_P: OnClickListener) {
+//        this.oOnClickListener = onClickListener_P
+//    }
 
 
 

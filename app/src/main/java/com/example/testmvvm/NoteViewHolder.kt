@@ -14,10 +14,6 @@ class NoteViewHolder(itemView_P: View) : RecyclerView.ViewHolder(itemView_P) {
         this.textViewTitle = itemView_P.findViewById(R.id.SAI_Title)
         this.textViewDescription = itemView_P.findViewById(R.id.SAI_Description)
         this.textViewPriority = itemView_P.findViewById(R.id.SAI_Priority)
-
-//        itemView_P.setOnClickListener {
-//
-//        }
     }
 
 

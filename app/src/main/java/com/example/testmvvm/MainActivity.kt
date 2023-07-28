@@ -33,21 +33,20 @@ class MainActivity : AppCompatActivity() {
 //                        nPrio = 0
 //                    }
 
-                    val nID = result.data?.getIntExtra(NoteActivity.EXTRA_ID,-1)
-                    // ID à passer à la Note
+                    val oNoteResult = Note(sTitle = sTitreSaisi, sDescription = sDescSaisi, nPriority = nPrio)
 
-                    val oNoteAAjouter = Note(sTitle = sTitreSaisi, sDescription = sDescSaisi, nPriority = nPrio)
-
+                    val nID = result.data?.getIntExtra(NoteActivity.EXTRA_ID,-1)?:-1
                     if (nID==-1){
-                        oNoteViewModel.insert(oNoteAAjouter)
+                        oNoteViewModel.insert(oNoteResult)
+                        Toast.makeText(this,"Note created",Toast.LENGTH_LONG).show()
                     }
                     else{
-                        oNoteViewModel.update(oNoteAAjouter)
+                        oNoteResult.id = nID
+                        oNoteViewModel.update(oNoteResult)
+                        Toast.makeText(this,"Note updated",Toast.LENGTH_LONG).show()
                     }
 
 
-
-                    Toast.makeText(this,"Note saved",Toast.LENGTH_LONG).show()
                 }
                 RESULT_CANCELED -> {
                     Toast.makeText(this,"Note cancelled",Toast.LENGTH_LONG).show()
@@ -120,7 +119,7 @@ class MainActivity : AppCompatActivity() {
 
             }).attachToRecyclerView(varRecyclerView)
 
-        // Applying OnClickListener to our Adapter
+/*        // Applying OnClickListener to our Adapter
         oAdapter.setOnClickListener(object : OnClickListener {
                 override fun onClick(oNote_P: Note, position: Int) {
                     val oIntent = Intent(this@MainActivity, NoteActivity::class.java)
@@ -128,18 +127,19 @@ class MainActivity : AppCompatActivity() {
                     intent.putExtra(NoteActivity.EXTRA_DESCRIPTION,oNote_P.sDescription)
                     intent.putExtra(NoteActivity.EXTRA_PRIORITY,oNote_P.nPriority)
                     intent.putExtra(NoteActivity.EXTRA_ID,oNote_P.id) // Permettra de savoir qu'on est en modif
-
-
-                    // https://www.youtube.com/watch?v=dYbbTGiZ2sA Suite 9:16
-
-                    // réutiliser oStartForResultAjout + EXTRA_MODE_OUVERTURE
-
-    //                // Passing the data to the
-    //                // EmployeeDetails Activity
-    //                intent.putExtra(NEXT_SCREEN, model)
-    //                startActivity(intent)
+                    oStartForResultAjout.launch(intent)
                 }
-            })
+            })*/
+
+        oAdapter.oOnItemClick = {oNote_P ->
+            val oIntent = Intent(this, NoteActivity::class.java)
+            intent.putExtra(NoteActivity.EXTRA_TITLE,oNote_P.sTitle)
+            intent.putExtra(NoteActivity.EXTRA_DESCRIPTION,oNote_P.sDescription)
+            intent.putExtra(NoteActivity.EXTRA_PRIORITY,oNote_P.nPriority)
+            intent.putExtra(NoteActivity.EXTRA_ID,oNote_P.id) // Permettra de savoir qu'on est en modif
+            //oStartForResultAjout.launch(intent)
+            startActivity(intent)
+        }
 
     }
 
