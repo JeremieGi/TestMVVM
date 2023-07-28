@@ -17,7 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
-    // Update https://www.youtube.com/watch?v=dYbbTGiZ2sA
+    // Suite pour animer : https://www.youtube.com/watch?v=xPPMygGxiEo
 
     // Toutes les itéractions avec la base passeront par cet objet
     private lateinit var oNoteViewModel : NoteViewModel
@@ -119,26 +119,13 @@ class MainActivity : AppCompatActivity() {
 
             }).attachToRecyclerView(varRecyclerView)
 
-/*        // Applying OnClickListener to our Adapter
-        oAdapter.setOnClickListener(object : OnClickListener {
-                override fun onClick(oNote_P: Note, position: Int) {
-                    val oIntent = Intent(this@MainActivity, NoteActivity::class.java)
-                    intent.putExtra(NoteActivity.EXTRA_TITLE,oNote_P.sTitle)
-                    intent.putExtra(NoteActivity.EXTRA_DESCRIPTION,oNote_P.sDescription)
-                    intent.putExtra(NoteActivity.EXTRA_PRIORITY,oNote_P.nPriority)
-                    intent.putExtra(NoteActivity.EXTRA_ID,oNote_P.id) // Permettra de savoir qu'on est en modif
-                    oStartForResultAjout.launch(intent)
-                }
-            })*/
-
         oAdapter.oOnItemClick = {oNote_P ->
-            val oIntent = Intent(this, NoteActivity::class.java)
-            intent.putExtra(NoteActivity.EXTRA_TITLE,oNote_P.sTitle)
-            intent.putExtra(NoteActivity.EXTRA_DESCRIPTION,oNote_P.sDescription)
-            intent.putExtra(NoteActivity.EXTRA_PRIORITY,oNote_P.nPriority)
-            intent.putExtra(NoteActivity.EXTRA_ID,oNote_P.id) // Permettra de savoir qu'on est en modif
-            //oStartForResultAjout.launch(intent)
-            startActivity(intent)
+            val oIntent = Intent(this@MainActivity, NoteActivity::class.java)
+            oIntent.putExtra(NoteActivity.EXTRA_TITLE,oNote_P.sTitle)
+            oIntent.putExtra(NoteActivity.EXTRA_DESCRIPTION,oNote_P.sDescription)
+            oIntent.putExtra(NoteActivity.EXTRA_PRIORITY,oNote_P.nPriority)
+            oIntent.putExtra(NoteActivity.EXTRA_ID,oNote_P.id) // Permettra de savoir qu'on est en modif
+            oStartForResultAjout.launch(oIntent)
         }
 
     }
