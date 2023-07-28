@@ -11,16 +11,13 @@ import android.widget.Toast
 
 class NoteActivity : AppCompatActivity() {
 
+
     // Passage paramètre à l'activity appelante
     companion object{
         const val EXTRA_ID = "com.example.testmvvm.ID"
         const val EXTRA_TITLE = "com.example.testmvvm.TITLE"
         const val EXTRA_DESCRIPTION = "com.example.testmvvm.EXTRA_DESCRIPTION"
         const val EXTRA_PRIORITY = "com.example.testmvvm.EXTRA_PRIORITY"
-
-        //const val EXTRA_MODE_OUVERTURE = "com.example.testmvvm.EXTRA_MODE_OUVERTURE" // Creation OU Modification
-
-
     }
 
     private lateinit var editTextTitle : EditText
@@ -39,8 +36,18 @@ class NoteActivity : AppCompatActivity() {
         numberPickerPriority.maxValue = 10
 
         this.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close)
-        this.title = "Add note"
 
+        // Si le paramètre ID est présent (Mode modif)
+        val bModeModification = this.intent.hasExtra(NoteActivity.EXTRA_ID)
+        if (bModeModification){
+            this.title = "Edit note"
+            editTextTitle.setText( this.intent.getStringExtra(EXTRA_TITLE) )
+            editTextDescription.setText( this.intent.getStringExtra(EXTRA_DESCRIPTION) )
+            numberPickerPriority.setValue( this.intent.getIntExtra(EXTRA_PRIORITY,1) )
+        }
+        else{
+            this.title = "Add note"
+        }
 
 
     }
@@ -86,6 +93,12 @@ class NoteActivity : AppCompatActivity() {
         oIntent.putExtra(EXTRA_TITLE,sTitle)
         oIntent.putExtra(EXTRA_DESCRIPTION,sDescription)
         oIntent.putExtra(EXTRA_PRIORITY,nPrio)
+
+        val nID = this.intent.getIntExtra(EXTRA_ID,-1)
+        if (nID!=-1){
+            // Mode modification
+            oIntent.putExtra(EXTRA_ID,nID)
+        }
 
         this.setResult(RESULT_OK,oIntent)
 

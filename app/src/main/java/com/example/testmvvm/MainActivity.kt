@@ -28,13 +28,24 @@ class MainActivity : AppCompatActivity() {
                 RESULT_OK -> {
                     val sTitreSaisi = result.data?.getStringExtra(NoteActivity.EXTRA_TITLE).toString()
                     val sDescSaisi = result.data?.getStringExtra(NoteActivity.EXTRA_DESCRIPTION).toString()
-                    var nPrio = result.data?.getIntExtra(NoteActivity.EXTRA_PRIORITY,1)?:0 // 0 si nPrio = null (plus élégant mais plus lisible ?)
+                    val nPrio = result.data?.getIntExtra(NoteActivity.EXTRA_PRIORITY,1)?:0 // 0 si nPrio = null (plus élégant mais plus lisible ?)
 //                    if (nPrio==null){
 //                        nPrio = 0
 //                    }
 
+                    val nID = result.data?.getIntExtra(NoteActivity.EXTRA_ID,-1)
+                    // ID à passer à la Note
+
                     val oNoteAAjouter = Note(sTitle = sTitreSaisi, sDescription = sDescSaisi, nPriority = nPrio)
-                    oNoteViewModel.insert(oNoteAAjouter)
+
+                    if (nID==-1){
+                        oNoteViewModel.insert(oNoteAAjouter)
+                    }
+                    else{
+                        oNoteViewModel.update(oNoteAAjouter)
+                    }
+
+
 
                     Toast.makeText(this,"Note saved",Toast.LENGTH_LONG).show()
                 }
@@ -116,7 +127,8 @@ class MainActivity : AppCompatActivity() {
                     intent.putExtra(NoteActivity.EXTRA_TITLE,oNote_P.sTitle)
                     intent.putExtra(NoteActivity.EXTRA_DESCRIPTION,oNote_P.sDescription)
                     intent.putExtra(NoteActivity.EXTRA_PRIORITY,oNote_P.nPriority)
-                    intent.putExtra(NoteActivity.EXTRA_ID,oNote_P.id) // Ouverture de fenêtre en modif
+                    intent.putExtra(NoteActivity.EXTRA_ID,oNote_P.id) // Permettra de savoir qu'on est en modif
+
 
                     // https://www.youtube.com/watch?v=dYbbTGiZ2sA Suite 9:16
 
