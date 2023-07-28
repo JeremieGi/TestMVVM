@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 
-class NoteAdapter : RecyclerView.Adapter<NoteViewHolder>() {
+class NoteAdapter : RecyclerView.Adapter<NoteViewHolder>()  {
 
     private var aoNotes : List<Note> = ArrayList()
+
+    private var oOnClickListener: OnClickListener? = null
 
     override fun onCreateViewHolder(parent_P: ViewGroup, viewType_P: Int): NoteViewHolder {
         // méthode appelé à chaque création de ViewHolder (élément répété)
@@ -21,12 +23,25 @@ class NoteAdapter : RecyclerView.Adapter<NoteViewHolder>() {
         return aoNotes.size
     }
 
-    override fun onBindViewHolder(holder: NoteViewHolder, nPosition_P: Int) {
+    // This new ViewHolder should be constructed with
+    // a new View that can represent the items
+    // of the given type. You can either create a
+    // new View manually or inflate it from an XML
+    // layout file.
+    override fun onBindViewHolder(itemView_P: NoteViewHolder, nPosition_P: Int) {
         // méthode permettant d'associer les datas
         val oCurrentNote = aoNotes[nPosition_P]
-        holder.textViewTitle.text = oCurrentNote.sTitle
-        holder.textViewDescription.text = oCurrentNote.sDescription
-        holder.textViewPriority.text = oCurrentNote.nPriority.toString()
+        itemView_P.textViewTitle.text = oCurrentNote.sTitle
+        itemView_P.textViewDescription.text = oCurrentNote.sDescription
+        itemView_P.textViewPriority.text = oCurrentNote.nPriority.toString()
+
+        // add an onclickListener to the item.
+        itemView_P.itemView.setOnClickListener {
+            if (oOnClickListener != null) {
+                oOnClickListener!!.onClick(oCurrentNote,nPosition_P)
+            }
+        }
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -41,5 +56,11 @@ class NoteAdapter : RecyclerView.Adapter<NoteViewHolder>() {
         return aoNotes[nPosition_P]
     }
 
-    // suite : https://www.youtube.com/watch?v=reSPN7mgshI
+    // A function to bind the onclickListener.
+    fun setOnClickListener(onClickListener_P: OnClickListener) {
+        this.oOnClickListener = onClickListener_P
+    }
+
+
+
 }

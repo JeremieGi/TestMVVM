@@ -28,10 +28,10 @@ class MainActivity : AppCompatActivity() {
                 RESULT_OK -> {
                     val sTitreSaisi = result.data?.getStringExtra(NoteActivity.EXTRA_TITLE).toString()
                     val sDescSaisi = result.data?.getStringExtra(NoteActivity.EXTRA_DESCRIPTION).toString()
-                    var nPrio = result.data?.getIntExtra(NoteActivity.EXTRA_PRIORITY,1)
-                    if (nPrio==null){
-                        nPrio = 0
-                    }
+                    var nPrio = result.data?.getIntExtra(NoteActivity.EXTRA_PRIORITY,1)?:0 // 0 si nPrio = null (plus élégant mais plus lisible ?)
+//                    if (nPrio==null){
+//                        nPrio = 0
+//                    }
 
                     val oNoteAAjouter = Note(sTitle = sTitreSaisi, sDescription = sDescSaisi, nPriority = nPrio)
                     oNoteViewModel.insert(oNoteAAjouter)
@@ -109,9 +109,25 @@ class MainActivity : AppCompatActivity() {
 
             }).attachToRecyclerView(varRecyclerView)
 
+        // Applying OnClickListener to our Adapter
+        oAdapter.setOnClickListener(object : OnClickListener {
+                override fun onClick(oNote_P: Note, position: Int) {
+                    val oIntent = Intent(this@MainActivity, NoteActivity::class.java)
+                    intent.putExtra(NoteActivity.EXTRA_TITLE,oNote_P.sTitle)
+                    intent.putExtra(NoteActivity.EXTRA_DESCRIPTION,oNote_P.sDescription)
+                    intent.putExtra(NoteActivity.EXTRA_PRIORITY,oNote_P.nPriority)
+                    intent.putExtra(NoteActivity.EXTRA_ID,oNote_P.id) // Ouverture de fenêtre en modif
 
+                    // https://www.youtube.com/watch?v=dYbbTGiZ2sA Suite 9:16
 
-    //ItemTouchHelper(ItemTouchHelper().Simpl)
+                    // réutiliser oStartForResultAjout + EXTRA_MODE_OUVERTURE
+
+    //                // Passing the data to the
+    //                // EmployeeDetails Activity
+    //                intent.putExtra(NEXT_SCREEN, model)
+    //                startActivity(intent)
+                }
+            })
 
     }
 
@@ -132,7 +148,6 @@ class MainActivity : AppCompatActivity() {
                 return super.onOptionsItemSelected(item_P)
             }
         }
-
 
     }
 }

@@ -13,9 +13,14 @@ class NoteActivity : AppCompatActivity() {
 
     // Passage paramètre à l'activity appelante
     companion object{
+        const val EXTRA_ID = "com.example.testmvvm.ID"
         const val EXTRA_TITLE = "com.example.testmvvm.TITLE"
         const val EXTRA_DESCRIPTION = "com.example.testmvvm.EXTRA_DESCRIPTION"
         const val EXTRA_PRIORITY = "com.example.testmvvm.EXTRA_PRIORITY"
+
+        //const val EXTRA_MODE_OUVERTURE = "com.example.testmvvm.EXTRA_MODE_OUVERTURE" // Creation OU Modification
+
+
     }
 
     private lateinit var editTextTitle : EditText
