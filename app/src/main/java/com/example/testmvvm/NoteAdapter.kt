@@ -16,7 +16,7 @@ class NoteAdapter : RecyclerView.Adapter<NoteViewHolder>()  {
 
 
     override fun onCreateViewHolder(parent_P: ViewGroup, viewType_P: Int): NoteViewHolder {
-        // méthode appelé à chaque création de ViewHolder (élément répété)
+        // méthode appelée à chaque création de ViewHolder (élément répété)
         val itemView = LayoutInflater.from(parent_P.context)
             .inflate(R.layout.note_item, parent_P,false)
         return NoteViewHolder(itemView)

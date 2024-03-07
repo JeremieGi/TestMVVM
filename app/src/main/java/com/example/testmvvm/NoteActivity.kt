@@ -38,12 +38,12 @@ class NoteActivity : AppCompatActivity() {
         this.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close)
 
         // Si le paramètre ID est présent (Mode modif)
-        val bModeModification = this.intent.hasExtra(NoteActivity.EXTRA_ID)
+        val bModeModification = this.intent.hasExtra(EXTRA_ID)
         if (bModeModification){
             this.title = "Edit note"
             editTextTitle.setText( this.intent.getStringExtra(EXTRA_TITLE) )
             editTextDescription.setText( this.intent.getStringExtra(EXTRA_DESCRIPTION) )
-            numberPickerPriority.setValue( this.intent.getIntExtra(EXTRA_PRIORITY,1) )
+            numberPickerPriority.value =  this.intent.getIntExtra(EXTRA_PRIORITY,1)
         }
         else{
             this.title = "Add note"
@@ -52,22 +52,23 @@ class NoteActivity : AppCompatActivity() {
 
     }
 
-    override fun onCreateOptionsMenu(menu_P: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menuP: Menu?): Boolean {
         // https://www.youtube.com/watch?v=RhGMd8SsA14 => 11min50
-        this.menuInflater.inflate(R.menu.add_note_menu,menu_P)
+        this.menuInflater.inflate(R.menu.add_note_menu,menuP)
         return true
     }
 
-    override fun onOptionsItemSelected(item_P: MenuItem): Boolean {
+    override fun onOptionsItemSelected(itemP: MenuItem): Boolean {
 
-        when (item_P.itemId) {
+        return when (itemP.itemId) {
 
             R.id.OPT_Save -> {
                 saveNote()
-                return true
+                true
             }
+
             else -> {
-                return super.onOptionsItemSelected(item_P)
+                super.onOptionsItemSelected(itemP)
             }
         }
 
