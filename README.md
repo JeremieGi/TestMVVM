@@ -1,4 +1,4 @@
-Exemple d'un application de Note
+Exemple d'une application de Note
 Pattern MVVM
 LiveData / Room
 Langage kotlin
